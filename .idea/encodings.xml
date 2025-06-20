@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/services/activities/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/config-sevrer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/discovery/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/information/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/roads-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/trip/src/main/java" charset="UTF-8" />
+  </component>
+</project>

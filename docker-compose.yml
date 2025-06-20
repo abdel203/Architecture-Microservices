@@ -1,0 +1,184 @@
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  postgres2:
+  mongo2:
+  neo4j_data:
+  neo4j_logs:
+
+services:
+
+  # ==== Bases de données ====
+  postgresql:
+    container_name: ms_pg_sql2
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: iznek
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - postgres2:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  mongodb:
+    container_name: ms_mongo_db2
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: iznek
+    volumes:
+      - mongo2:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  mongo-express:
+    container_name: mongo_express2
+    image: mongo-express:latest
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: iznek
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    ports:
+      - "8081:8081"
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  neo4j:
+    container_name: ms_neo4j
+    image: neo4j:5.19
+    environment:
+      NEO4J_AUTH: neo4j/iznek3737
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    ports:
+      - "7474:7474"   # UI HTTP
+      - "7687:7687"   # Bolt
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  # ==== Eureka Discovery ====
+  discovery-service:
+    build:
+      context: ./services/discovery
+      dockerfile: Dockerfile
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  # ==== API Gateway ====
+  gateway-service:
+    build:
+      context: ./services/gateway
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    ports:
+      - "8222:8222"
+    depends_on:
+      - discovery-service
+    networks:
+      - microservices-net
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka/
+      - eureka.client.enabled=true
+      - eureka.host=discovery
+      - eureka.instance.preferIpAddress=true
+    restart: unless-stopped
+
+  # ==== Activities Service ====
+  activities-service:
+    build:
+      context: ./services/activities
+      dockerfile: Dockerfile
+    container_name: activities-service
+    ports:
+      - "8070:8070"
+    depends_on:
+      - mongodb
+      - discovery-service
+    networks:
+      - microservices-net
+    environment:
+      - spring.data.mongodb.host=mongodb
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka/
+      - eureka.client.enabled=true
+      - eureka.host=discovery
+      - eureka.instance.preferIpAddress=true
+    restart: unless-stopped
+
+  # ==== Information Service (PostgreSQL + Flyway) ====
+  information-service:
+    build:
+      context: ./services/information
+      dockerfile: Dockerfile
+    container_name: information-service
+    ports:
+      - "8050:8050"
+    depends_on:
+      - postgresql
+      - discovery-service
+    networks:
+      - microservices-net
+    environment:
+      - spring.datasource.url=jdbc:postgresql://postgresql:5432/information
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka/
+      - eureka.client.enabled=true
+      - eureka.host=discovery
+      - eureka.instance.preferIpAddress=true
+    restart: unless-stopped
+
+  # ==== Roads Service (Neo4j) ====
+  roads-service:
+    build:
+      context: ./services/roads-service
+      dockerfile: Dockerfile
+    container_name: roads-service
+    ports:
+      - "8071:8071"
+    depends_on:
+      - neo4j
+      - discovery-service
+    networks:
+      - microservices-net
+    environment:
+      - spring.neo4j.uri=bolt://neo4j:7687
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka/
+      - eureka.client.enabled=true
+      - eureka.host=discovery
+      - eureka.instance.preferIpAddress=true
+    restart: unless-stopped
+
+  # ==== Trip Service (MongoDB) ====
+  trip-service:
+    build:
+      context: ./services/trip
+      dockerfile: Dockerfile
+    container_name: trip-service
+    ports:
+      - "8072:8072"
+    depends_on:
+      - mongodb
+      - discovery-service
+    networks:
+      - microservices-net
+    environment:
+      - spring.data.mongodb.host=mongodb
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka/
+      - eureka.client.enabled=true
+      - eureka.host=discovery
+      - eureka.instance.preferIpAddress=true
+    restart: unless-stopped

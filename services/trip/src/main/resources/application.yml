@@ -1,0 +1,26 @@
+server:
+  port: 8072
+spring:
+  cloud:
+    config:
+      override-system-properties: false
+  data:
+    mongodb:
+      username: root
+      password: iznek
+      host: localhost
+      port: 27017
+      database: trip
+      authentication-database: admin
+  application:
+    name: trip-service
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true

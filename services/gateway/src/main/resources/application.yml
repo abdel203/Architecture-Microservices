@@ -1,0 +1,42 @@
+server:
+  port: 8222
+spring:
+  cloud:
+    config:
+      override-system-properties: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: information-service
+          uri: lb:http://INFORMATION-SERVICE
+          predicates:
+            - Path=/api/v1/information/**
+        - id: roads-service
+          uri: lb:http://ROADS-SERVICE
+          predicates:
+            - Path=/api/v1/roads/**
+        - id: activities-service
+          uri: lb:http://ACTIVITIES-SERVICE
+          predicates:
+            - Path=/api/v1/activities/**
+        - id: pois-service
+          uri: lb:http://ACTIVITIES-SERVICE
+          predicates:
+            - Path=/api/v1/pois/**
+        - id: trip-service
+          uri: lb:http://TRIP-SERVICE
+          predicates:
+            - Path=/api/v1/trip/**
+  application:
+    name: gateway-service
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
