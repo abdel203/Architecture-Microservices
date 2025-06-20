@@ -1,0 +1,674 @@
+{
+	"info": {
+		"_postman_id": "b907cd06-7093-44e8-92e7-eaa52db247e0",
+		"name": "ms/bdd-project",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31707186",
+		"_collection_link": "https://dz5555.postman.co/workspace/DZ-Workspace~30b43918-a854-4811-8b84-977f4bbfddff/collection/31707186-b907cd06-7093-44e8-92e7-eaa52db247e0?action=share&source=collection_link&creator=31707186"
+	},
+	"item": [
+		{
+			"name": "create",
+			"item": [
+				{
+					"name": "create (one by one)",
+					"item": [
+						{
+							"name": "create city",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Paris\",\n  \"latitude\": 48.8566,\n  \"longitude\": 2.3522\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8222/api/v1/information/cities",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8222",
+									"path": [
+										"api",
+										"v1",
+										"information",
+										"cities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create point of interest",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Nom du POI\",\n  \"cityId\": 1,\n  \"latitude\": 48.8566,\n  \"longitude\": 2.3522,\n  \"description\": {\n    \"type\": \"monument\",\n    \"history\": \"Construit en 1889 pour l'Exposition universelle.\",\n    \"access\": \"Ouvert tous les jours de 9h à 23h.\"\n  }\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8222/api/v1/information/pois",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8222",
+									"path": [
+										"api",
+										"v1",
+										"information",
+										"pois"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create trip",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"start_date\": \"2025-07-01T09:00:00+02:00\",\n    \"end_date\":   \"2025-07-05T12:00:00+02:00\",\n    \"steps\": [\n      {\n        \"city_name\":  \"Paris\",\n        \"start_date\": \"2025-07-01T09:00:00+02:00\",\n        \"end_date\":   \"2025-07-03T18:00:00+02:00\",\n        \"activities\": [\n          {\n            \"name\":     \"Visite de la Tour Eiffel\",\n            \"price\":    25.50,\n            \"poi_name\": \"Eiffel Tower\",\n            \"date\":     \"2025-07-02T10:00:00+02:00\"\n          }\n        ],\n        \"lodging\": {\n          \"name\":    \"Hotel Paris Centre\",\n          \"price\":   120.00,\n          \"address\": \"10 Rue de Rivoli, Paris\"\n        },\n        \"next_step\": {\n          \"city_name\":   \"Lyon\",\n          \"distance\":    465.3,\n          \"travel_time\": \"PT2H\"\n        }\n      },\n      {\n        \"city_name\":  \"Lyon\",\n        \"start_date\": \"2025-07-03T20:00:00+02:00\",\n        \"end_date\":   \"2025-07-05T12:00:00+02:00\",\n        \"activities\": [\n          {\n            \"name\":     \"Tour du Vieux Lyon\",\n            \"price\":    30.00,\n            \"poi_name\": \"Vieux Lyon\",\n            \"date\":     \"2025-07-04T14:00:00+02:00\"\n          }\n        ],\n        \"lodging\": {\n          \"name\":    \"Lyon Plaza Hotel\",\n          \"price\":   100.00,\n          \"address\": \"5 Place Bellecour, Lyon\"\n        },\n        \"next_step\": {\n          \"city_name\":   \"Marseille\",\n          \"distance\":    300.0,\n          \"travel_time\": \"PT3H\"\n        }\n      }\n    ]\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8222/api/v1/trip",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8222",
+									"path": [
+										"api",
+										"v1",
+										"trip"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create (batch)",
+					"item": [
+						{
+							"name": "create cities",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"name\": \"Paris\",\n        \"latitude\": 48.8566,\n        \"longitude\": 2.3522\n    },\n    {\n        \"name\": \"Lyon\",\n        \"latitude\": 45.75,\n        \"longitude\": 4.85\n    },\n    {\n        \"name\": \"Marseille\",\n        \"latitude\": 43.2965,\n        \"longitude\": 5.3698\n    },\n    {\n        \"name\": \"Grenoble\",\n        \"latitude\": 45.1885,\n        \"longitude\": 5.7245\n    },\n    {\n        \"name\": \"Nice\",\n        \"latitude\": 43.7102,\n        \"longitude\": 7.262\n    },\n    {\n        \"name\": \"Toulouse\",\n        \"latitude\": 43.6047,\n        \"longitude\": 1.4442\n    },\n    {\n        \"name\": \"Strasbourg\",\n        \"latitude\": 48.5734,\n        \"longitude\": 7.7521\n    },\n    {\n        \"name\": \"Bordeaux\",\n        \"latitude\": 44.8378,\n        \"longitude\": -0.5792\n    },\n    {\n        \"name\": \"Lille\",\n        \"latitude\": 50.6292,\n        \"longitude\": 3.0573\n    },\n    {\n        \"name\": \"Nantes\",\n        \"latitude\": 47.2184,\n        \"longitude\": -1.5536\n    },\n    {\n        \"name\": \"Montpellier\",\n        \"latitude\": 43.6119,\n        \"longitude\": 3.8777\n    },\n    {\n        \"name\": \"Annecy\",\n        \"latitude\": 45.8992,\n        \"longitude\": 6.1294\n    },\n    {\n        \"name\": \"Dijon\",\n        \"latitude\": 47.322,\n        \"longitude\": 5.0415\n    }, \n    {\n        \"name\": \"Saint-Malo\",\n        \"latitude\": 48.6493,\n        \"longitude\": -2.0257\n    },\n    {\n        \"name\": \"Chamonix\",\n        \"latitude\": 45.9237,\n        \"longitude\": 6.8694\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8222/api/v1/information/citiesList",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8222",
+									"path": [
+										"api",
+										"v1",
+										"information",
+										"citiesList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create lodgings",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"name\": \"Hotel Le Marais\",\n    \"address\": \"12 Rue de Rivoli, 75001 Paris\",\n    \"pricePerNight\": 145.00,\n    \"latitude\": 48.8570,\n    \"longitude\": 2.3525,\n    \"cityId\": 1\n  },\n  {\n    \"name\": \"Paris Boutique Stay\",\n    \"address\": \"22 Rue Oberkampf, 75011 Paris\",\n    \"pricePerNight\": 130.00,\n    \"latitude\": 48.8581,\n    \"longitude\": 2.3531,\n    \"cityId\": 1\n  },\n  {\n    \"name\": \"Eiffel Comfort Lodge\",\n    \"address\": \"5 Rue de Grenelle, 75007 Paris\",\n    \"pricePerNight\": 155.00,\n    \"latitude\": 48.8555,\n    \"longitude\": 2.3528,\n    \"cityId\": 1\n  },\n\n  {\n    \"name\": \"Lyon Centre Suites\",\n    \"address\": \"8 Rue de la République, 69001 Lyon\",\n    \"pricePerNight\": 110.00,\n    \"latitude\": 45.7512,\n    \"longitude\": 4.8495,\n    \"cityId\": 2\n  },\n  {\n    \"name\": \"La Croix Rousse Hotel\",\n    \"address\": \"17 Rue d'Austerlitz, 69004 Lyon\",\n    \"pricePerNight\": 95.00,\n    \"latitude\": 45.7541,\n    \"longitude\": 4.8412,\n    \"cityId\": 2\n  },\n  {\n    \"name\": \"Bellecour City Inn\",\n    \"address\": \"4 Place Bellecour, 69002 Lyon\",\n    \"pricePerNight\": 120.00,\n    \"latitude\": 45.7500,\n    \"longitude\": 4.8505,\n    \"cityId\": 2\n  },\n\n  {\n    \"name\": \"Marseille Bay Hotel\",\n    \"address\": \"22 Quai du Port, 13002 Marseille\",\n    \"pricePerNight\": 125.00,\n    \"latitude\": 43.2960,\n    \"longitude\": 5.3690,\n    \"cityId\": 3\n  },\n  {\n    \"name\": \"Vieux-Port Residence\",\n    \"address\": \"6 Rue Fort Notre Dame, 13007 Marseille\",\n    \"pricePerNight\": 105.00,\n    \"latitude\": 43.2971,\n    \"longitude\": 5.3702,\n    \"cityId\": 3\n  },\n  {\n    \"name\": \"Mediterranean Inn\",\n    \"address\": \"18 Boulevard Charles Livon, 13007 Marseille\",\n    \"pricePerNight\": 135.00,\n    \"latitude\": 43.2958,\n    \"longitude\": 5.3688,\n    \"cityId\": 3\n  },\n\n  {\n    \"name\": \"Grenoble Montagne Inn\",\n    \"address\": \"14 Rue Félix Poulat, 38000 Grenoble\",\n    \"pricePerNight\": 95.00,\n    \"latitude\": 45.1890,\n    \"longitude\": 5.7250,\n    \"cityId\": 4\n  },\n  {\n    \"name\": \"Alpes Comfort Stay\",\n    \"address\": \"9 Rue de Strasbourg, 38000 Grenoble\",\n    \"pricePerNight\": 85.00,\n    \"latitude\": 45.1880,\n    \"longitude\": 5.7235,\n    \"cityId\": 4\n  },\n  {\n    \"name\": \"Central Park Hotel\",\n    \"address\": \"3 Place Victor Hugo, 38000 Grenoble\",\n    \"pricePerNight\": 100.00,\n    \"latitude\": 45.1887,\n    \"longitude\": 5.7241,\n    \"cityId\": 4\n  },\n\n  {\n    \"name\": \"Nice Côte d'Azur Lodge\",\n    \"address\": \"10 Promenade des Anglais, 06000 Nice\",\n    \"pricePerNight\": 160.00,\n    \"latitude\": 43.7100,\n    \"longitude\": 7.2625,\n    \"cityId\": 5\n  },\n  {\n    \"name\": \"Old Town Guesthouse\",\n    \"address\": \"5 Rue Droite, 06300 Nice\",\n    \"pricePerNight\": 140.00,\n    \"latitude\": 43.7098,\n    \"longitude\": 7.2618,\n    \"cityId\": 5\n  },\n  {\n    \"name\": \"Sea View Inn\",\n    \"address\": \"2 Rue de France, 06000 Nice\",\n    \"pricePerNight\": 155.00,\n    \"latitude\": 43.7105,\n    \"longitude\": 7.2631,\n    \"cityId\": 5\n  },\n\n  {\n    \"name\": \"Toulouse Plaza Hotel\",\n    \"address\": \"3 Place du Capitole, 31000 Toulouse\",\n    \"pricePerNight\": 105.00,\n    \"latitude\": 43.6045,\n    \"longitude\": 1.4440,\n    \"cityId\": 6\n  },\n  {\n    \"name\": \"Canal du Midi Inn\",\n    \"address\": \"21 Allées Jean Jaurès, 31000 Toulouse\",\n    \"pricePerNight\": 95.00,\n    \"latitude\": 43.6038,\n    \"longitude\": 1.4435,\n    \"cityId\": 6\n  },\n  {\n    \"name\": \"Occitanie Boutique Hotel\",\n    \"address\": \"7 Rue Lafayette, 31000 Toulouse\",\n    \"pricePerNight\": 112.00,\n    \"latitude\": 43.6050,\n    \"longitude\": 1.4450,\n    \"cityId\": 6\n  },\n\n  {\n    \"name\": \"Strasbourg Petite France\",\n    \"address\": \"5 Quai des Bateliers, 67000 Strasbourg\",\n    \"pricePerNight\": 115.00,\n    \"latitude\": 48.5730,\n    \"longitude\": 7.7525,\n    \"cityId\": 7\n  },\n  {\n    \"name\": \"Alsace City Lodge\",\n    \"address\": \"10 Rue du Faubourg National, 67000 Strasbourg\",\n    \"pricePerNight\": 100.00,\n    \"latitude\": 48.5742,\n    \"longitude\": 7.7518,\n    \"cityId\": 7\n  },\n  {\n    \"name\": \"Cathedral View Hotel\",\n    \"address\": \"3 Rue Mercière, 67000 Strasbourg\",\n    \"pricePerNight\": 130.00,\n    \"latitude\": 48.5735,\n    \"longitude\": 7.7532,\n    \"cityId\": 7\n  },\n\n  {\n    \"name\": \"Bordeaux Grand Hotel\",\n    \"address\": \"2 Cours du XXX Juillet, 33000 Bordeaux\",\n    \"pricePerNight\": 130.00,\n    \"latitude\": 44.8375,\n    \"longitude\": -0.5790,\n    \"cityId\": 8\n  },\n  {\n    \"name\": \"Saint-Pierre Suites\",\n    \"address\": \"8 Rue des Bahutiers, 33000 Bordeaux\",\n    \"pricePerNight\": 115.00,\n    \"latitude\": 44.8380,\n    \"longitude\": -0.5788,\n    \"cityId\": 8\n  },\n  {\n    \"name\": \"Garonne Riverside Inn\",\n    \"address\": \"15 Quai de la Monnaie, 33800 Bordeaux\",\n    \"pricePerNight\": 125.00,\n    \"latitude\": 44.8370,\n    \"longitude\": -0.5795,\n    \"cityId\": 8\n  },\n\n  {\n    \"name\": \"Lille City Center\",\n    \"address\": \"11 Place Rihour, 59000 Lille\",\n    \"pricePerNight\": 100.00,\n    \"latitude\": 50.6290,\n    \"longitude\": 3.0570,\n    \"cityId\": 9\n  },\n  {\n    \"name\": \"Grand Palais Hotel\",\n    \"address\": \"3 Rue du Molinel, 59000 Lille\",\n    \"pricePerNight\": 90.00,\n    \"latitude\": 50.6285,\n    \"longitude\": 3.0560,\n    \"cityId\": 9\n  },\n  {\n    \"name\": \"Lille Flandres Lodge\",\n    \"address\": \"6 Rue de Tournai, 59000 Lille\",\n    \"pricePerNight\": 105.00,\n    \"latitude\": 50.6288,\n    \"longitude\": 3.0578,\n    \"cityId\": 9\n  },\n\n  {\n    \"name\": \"Nantes Riverside Hotel\",\n    \"address\": \"4 Quai de la Fosse, 44000 Nantes\",\n    \"pricePerNight\": 98.00,\n    \"latitude\": 47.2180,\n    \"longitude\": -1.5530,\n    \"cityId\": 10\n  },\n  {\n    \"name\": \"Loire Valley Inn\",\n    \"address\": \"12 Rue Kervégan, 44000 Nantes\",\n    \"pricePerNight\": 88.00,\n    \"latitude\": 47.2190,\n    \"longitude\": -1.5540,\n    \"cityId\": 10\n  },\n  {\n    \"name\": \"Place Royale Suites\",\n    \"address\": \"3 Place Royale, 44000 Nantes\",\n    \"pricePerNight\": 102.00,\n    \"latitude\": 47.2185,\n    \"longitude\": -1.5520,\n    \"cityId\": 10\n  },\n\n  {\n    \"name\": \"Montpellier Garden Inn\",\n    \"address\": \"6 Boulevard Sarrail, 34000 Montpellier\",\n    \"pricePerNight\": 105.00,\n    \"latitude\": 43.6115,\n    \"longitude\": 3.8780,\n    \"cityId\": 11\n  },\n  {\n    \"name\": \"Comédie Central Hotel\",\n    \"address\": \"8 Place de la Comédie, 34000 Montpellier\",\n    \"pricePerNight\": 97.00,\n    \"latitude\": 43.6118,\n    \"longitude\": 3.8775,\n    \"cityId\": 11\n  },\n  {\n    \"name\": \"Montpellier Sud Suites\",\n    \"address\": \"15 Rue de la République, 34000 Montpellier\",\n    \"pricePerNight\": 110.00,\n    \"latitude\": 43.6120,\n    \"longitude\": 3.8782,\n    \"cityId\": 11\n  },\n\n  {\n    \"name\": \"Annecy Lake View\",\n    \"address\": \"9 Quai Eustache Chappuis, 74000 Annecy\",\n    \"pricePerNight\": 140.00,\n    \"latitude\": 45.8990,\n    \"longitude\": 6.1292,\n    \"cityId\": 12\n  },\n  {\n    \"name\": \"Haute-Savoie Inn\",\n    \"address\": \"2 Rue Jean Jaurès, 74000 Annecy\",\n    \"pricePerNight\": 130.00,\n    \"latitude\": 45.8998,\n    \"longitude\": 6.1285,\n    \"cityId\": 12\n  },\n  {\n    \"name\": \"Old Town Chalet\",\n    \"address\": \"7 Rue de l'Île, 74000 Annecy\",\n    \"pricePerNight\": 145.00,\n    \"latitude\": 45.8985,\n    \"longitude\": 6.1298,\n    \"cityId\": 12\n  },\n\n  {\n    \"name\": \"Dijon Hôtel de Ville\",\n    \"address\": \"1 Place de la Libération, 21000 Dijon\",\n    \"pricePerNight\": 102.00,\n    \"latitude\": 47.3225,\n    \"longitude\": 5.0412,\n    \"cityId\": 13\n  },\n  {\n    \"name\": \"Burgundy Inn\",\n    \"address\": \"4 Rue de la Liberté, 21000 Dijon\",\n    \"pricePerNight\": 95.00,\n    \"latitude\": 47.3218,\n    \"longitude\": 5.0410,\n    \"cityId\": 13\n  },\n  {\n    \"name\": \"Cité des Ducs Hotel\",\n    \"address\": \"9 Rue Vaillant, 21000 Dijon\",\n    \"pricePerNight\": 110.00,\n    \"latitude\": 47.3220,\n    \"longitude\": 5.0405,\n    \"cityId\": 13\n  },\n\n  {\n    \"name\": \"Saint-Malo Beachfront\",\n    \"address\": \"7 Chaussée du Sillon, 35400 Saint-Malo\",\n    \"pricePerNight\": 128.00,\n    \"latitude\": 48.6490,\n    \"longitude\": -2.0252,\n    \"cityId\": 14\n  },\n  {\n    \"name\": \"Corsaire Inn\",\n    \"address\": \"3 Rue Jacques Cartier, 35400 Saint-Malo\",\n    \"pricePerNight\": 120.00,\n    \"latitude\": 48.6485,\n    \"longitude\": -2.0255,\n    \"cityId\": 14\n  },\n  {\n    \"name\": \"Intramuros Stay\",\n    \"address\": \"5 Rue Sainte-Barbe, 35400 Saint-Malo\",\n    \"pricePerNight\": 135.00,\n    \"latitude\": 48.6488,\n    \"longitude\": -2.0249,\n    \"cityId\": 14\n  },\n\n  {\n    \"name\": \"Chamonix Chalet View\",\n    \"address\": \"15 Rue du Lyret, 74400 Chamonix\",\n    \"pricePerNight\": 150.00,\n    \"latitude\": 45.9235,\n    \"longitude\": 6.8696,\n    \"cityId\": 15\n  },\n  {\n    \"name\": \"Mont-Blanc Lodge\",\n    \"address\": \"3 Rue Whymper, 74400 Chamonix\",\n    \"pricePerNight\": 140.00,\n    \"latitude\": 45.9240,\n    \"longitude\": 6.8692,\n    \"cityId\": 15\n  },\n  {\n    \"name\": \"Alpine View Inn\",\n    \"address\": \"10 Chemin du Cry, 74400 Chamonix\",\n    \"pricePerNight\": 160.00,\n    \"latitude\": 45.9230,\n    \"longitude\": 6.8700,\n    \"cityId\": 15\n  }\n]\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8222/api/v1/information/lodgingsList",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8222",
+									"path": [
+										"api",
+										"v1",
+										"information",
+										"lodgingsList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create points of interest",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"name\": \"Tour Eiffel\",\n    \"cityId\": 1,\n    \"latitude\": 48.8584,\n    \"longitude\": 2.2945,\n    \"description\": {\n      \"type\": \"monument\",\n      \"construit\": \"1889\",\n      \"infos\": \"Symbole de Paris, 300m de hauteur\"\n    }\n  },\n  {\n    \"name\": \"Musée du Louvre\",\n    \"cityId\": 1,\n    \"latitude\": 48.8606,\n    \"longitude\": 2.3376,\n    \"description\": {\n      \"type\": \"musée\",\n      \"œuvres\": [\"Mona Lisa\", \"Vénus de Milo\"],\n      \"style\": \"Palais royal\"\n    }\n  },\n  {\n    \"name\": \"Basilique de Fourvière\",\n    \"cityId\": 2,\n    \"latitude\": 45.7622,\n    \"longitude\": 4.8224,\n    \"description\": {\n      \"type\": \"basilique\",\n      \"vue\": \"Panoramique sur Lyon\",\n      \"conseil\": \"Funiculaire conseillé\"\n    }\n  },\n  {\n    \"name\": \"Parc de la Tête d'Or\",\n    \"cityId\": 2,\n    \"latitude\": 45.7772,\n    \"longitude\": 4.8556,\n    \"description\": {\n      \"type\": \"parc\",\n      \"activités\": [\"zoo\", \"lac\", \"serres tropicales\"],\n      \"entrée\": \"gratuite\"\n    }\n  },\n  {\n    \"name\": \"Vieux-Port\",\n    \"cityId\": 3,\n    \"latitude\": 43.2964,\n    \"longitude\": 5.3698,\n    \"description\": {\n      \"type\": \"port\",\n      \"animation\": \"Marché aux poissons, bars, bateaux\"\n    }\n  },\n  {\n    \"name\": \"Calanques de Sormiou\",\n    \"cityId\": 3,\n    \"latitude\": 43.2164,\n    \"longitude\": 5.4349,\n    \"description\": {\n      \"type\": \"nature\",\n      \"accès\": \"randonnée ou bateau\",\n      \"conseil\": \"emporter de l'eau\"\n    }\n  },\n  {\n    \"name\": \"Fort de la Bastille\",\n    \"cityId\": 4,\n    \"latitude\": 45.1994,\n    \"longitude\": 5.7285,\n    \"description\": {\n      \"type\": \"fort\",\n      \"accès\": \"téléphérique\",\n      \"vue\": \"Alpes et ville\"\n    }\n  },\n  {\n    \"name\": \"Musée de Grenoble\",\n    \"cityId\": 4,\n    \"latitude\": 45.1911,\n    \"longitude\": 5.7275,\n    \"description\": {\n      \"type\": \"musée\",\n      \"collection\": \"art ancien et moderne\"\n    }\n  },\n  {\n    \"name\": \"Promenade des Anglais\",\n    \"cityId\": 5,\n    \"latitude\": 43.6956,\n    \"longitude\": 7.2556,\n    \"description\": {\n      \"type\": \"promenade\",\n      \"bordDeMer\": true\n    }\n  },\n  {\n    \"name\": \"Colline du Château\",\n    \"cityId\": 5,\n    \"latitude\": 43.7034,\n    \"longitude\": 7.2816,\n    \"description\": {\n      \"type\": \"parc\",\n      \"panorama\": true,\n      \"ancienChâteau\": true\n    }\n  },\n  {\n    \"name\": \"Capitole de Toulouse\",\n    \"cityId\": 6,\n    \"latitude\": 43.6043,\n    \"longitude\": 1.4437,\n    \"description\": {\n      \"type\": \"bâtiment\",\n      \"fonction\": \"Hôtel de ville\"\n    }\n  },\n  {\n    \"name\": \"Cité de l'espace\",\n    \"cityId\": 6,\n    \"latitude\": 43.5861,\n    \"longitude\": 1.4926,\n    \"description\": {\n      \"type\": \"musée\",\n      \"thème\": \"Espace et astronautique\"\n    }\n  },\n  {\n    \"name\": \"Cathédrale de Strasbourg\",\n    \"cityId\": 7,\n    \"latitude\": 48.5812,\n    \"longitude\": 7.7507,\n    \"description\": {\n      \"type\": \"cathédrale\",\n      \"style\": \"gothique\",\n      \"hauteur\": \"142m\"\n    }\n  },\n  {\n    \"name\": \"Quartier de la Petite France\",\n    \"cityId\": 7,\n    \"latitude\": 48.5782,\n    \"longitude\": 7.7415,\n    \"description\": {\n      \"type\": \"quartier\",\n      \"architecture\": \"à colombages\"\n    }\n  },\n  {\n    \"name\": \"Place de la Bourse\",\n    \"cityId\": 8,\n    \"latitude\": 44.8414,\n    \"longitude\": -0.5708,\n    \"description\": {\n      \"type\": \"place\",\n      \"reflet\": \"miroir d’eau\",\n      \"vue\": \"fleuve\"\n    }\n  },\n  {\n    \"name\": \"Cité du Vin\",\n    \"cityId\": 8,\n    \"latitude\": 44.8592,\n    \"longitude\": -0.5669,\n    \"description\": {\n      \"type\": \"musée\",\n      \"thème\": \"vin et culture viticole\"\n    }\n  },\n  {\n    \"name\": \"Beffroi de Lille\",\n    \"cityId\": 9,\n    \"latitude\": 50.6322,\n    \"longitude\": 3.0629,\n    \"description\": {\n      \"type\": \"monument\",\n      \"UNESCO\": true\n    }\n  },\n  {\n    \"name\": \"Palais des Beaux-Arts\",\n    \"cityId\": 9,\n    \"latitude\": 50.6318,\n    \"longitude\": 3.0621,\n    \"description\": {\n      \"type\": \"musée\",\n      \"contenu\": \"peintures, sculptures\"\n    }\n  },\n  {\n    \"name\": \"Château des Ducs de Bretagne\",\n    \"cityId\": 10,\n    \"latitude\": 47.2164,\n    \"longitude\": -1.5492,\n    \"description\": {\n      \"type\": \"château\",\n      \"musée\": true\n    }\n  },\n  {\n    \"name\": \"Machines de l'île\",\n    \"cityId\": 10,\n    \"latitude\": 47.2064,\n    \"longitude\": -1.5649,\n    \"description\": {\n      \"type\": \"attraction\",\n      \"éléphant\": \"mécanique géant\"\n    }\n  },\n  {\n    \"name\": \"Place de la Comédie\",\n    \"cityId\": 11,\n    \"latitude\": 43.6108,\n    \"longitude\": 3.8767,\n    \"description\": {\n      \"type\": \"place\",\n      \"vie\": \"très animée\"\n    }\n  },\n  {\n    \"name\": \"Jardin des plantes\",\n    \"cityId\": 11,\n    \"latitude\": 43.6092,\n    \"longitude\": 3.8789,\n    \"description\": {\n      \"type\": \"jardin\",\n      \"ambiance\": \"reposante\"\n    }\n  },\n  {\n    \"name\": \"Lac d'Annecy\",\n    \"cityId\": 12,\n    \"latitude\": 45.8722,\n    \"longitude\": 6.1659,\n    \"description\": {\n      \"type\": \"lac\",\n      \"activités\": [\"voile\", \"pédalo\", \"plage\"]\n    }\n  },\n  {\n    \"name\": \"Vieille ville\",\n    \"cityId\": 12,\n    \"latitude\": 45.8987,\n    \"longitude\": 6.1247,\n    \"description\": {\n      \"type\": \"quartier\",\n      \"ruelles\": true,\n      \"canaux\": true\n    }\n  },\n  {\n    \"name\": \"Musée des Beaux-Arts de Dijon\",\n    \"cityId\": 13,\n    \"latitude\": 47.3211,\n    \"longitude\": 5.0406,\n    \"description\": {\n      \"type\": \"musée\",\n      \"œuvres\": [\"Moyen Âge\", \"Renaissance\"]\n    }\n  },\n  {\n    \"name\": \"Tour Philippe le Bon\",\n    \"cityId\": 13,\n    \"latitude\": 47.3227,\n    \"longitude\": 5.0419,\n    \"description\": {\n      \"type\": \"tour\",\n      \"vue\": \"360° sur Dijon\"\n    }\n  },\n  {\n    \"name\": \"Remparts de Saint-Malo\",\n    \"cityId\": 14,\n    \"latitude\": 48.6494,\n    \"longitude\": -2.0256,\n    \"description\": {\n      \"type\": \"fortifications\",\n      \"vue\": \"mer et ville intra-muros\"\n    }\n  },\n  {\n    \"name\": \"Fort National\",\n    \"cityId\": 14,\n    \"latitude\": 48.6521,\n    \"longitude\": -2.0273,\n    \"description\": {\n      \"type\": \"fort\",\n      \"construit\": \"1689 par Vauban\"\n    }\n  },\n  {\n    \"name\": \"Aiguille du Midi\",\n    \"cityId\": 15,\n    \"latitude\": 45.8809,\n    \"longitude\": 6.8873,\n    \"description\": {\n      \"type\": \"sommet\",\n      \"accès\": \"téléphérique depuis Chamonix\"\n    }\n  },\n  {\n    \"name\": \"Mer de Glace\",\n    \"cityId\": 15,\n    \"latitude\": 45.9224,\n    \"longitude\": 6.9388,\n    \"description\": {\n      \"type\": \"glacier\",\n      \"accès\": \"train du Montenvers\"\n    }\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8222/api/v1/information/poiList",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8222",
+									"path": [
+										"api",
+										"v1",
+										"information",
+										"poiList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create activity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"name\": \"Montée au sommet de la Tour Eiffel\",\n    \"price\": 25.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 1,\n    \"description\": {\n      \"type\": \"visite\",\n      \"niveau\": \"ascenseur ou escalier\",\n      \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"vue\": \"panoramique sur Paris\"\n    }\n  },\n  {\n    \"name\": \"Tour guidé historique\",\n    \"price\": 15.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 1,\n    \"description\": {\n      \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"langues\": [\"fr\", \"en\"],\n      \"guide\": true\n    }\n  },\n\n  {\n    \"name\": \"Visite des galeries du Louvre\",\n    \"price\": 20.00,\n    \"duration\": \"PT2H\",\n    \"poiId\": 2,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"thèmes\": [\"peinture\", \"sculpture\"],\n        \"accès\": \"entrée principale Pyramide\"\n    }\n  },\n  {\n    \"name\": \"Parcours famille dans le musée\",\n    \"price\": 10.00,\n    \"duration\": \"PT1H30M\",\n    \"poiId\": 2,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"public\": \"famille\",\n      \"supports\": \"audio-guide enfant\"\n    }\n  },\n\n  {\n    \"name\": \"Accès à la basilique\",\n    \"price\": 5.00,\n    \"duration\": \"PT30M\",\n    \"poiId\": 3,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"escalier\": true,\n      \"vue\": \"panoramique\"\n    }\n  },\n  {\n    \"name\": \"Concert d’orgue\",\n    \"price\": 12.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 3,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"type\": \"concert\",\n        \"fréquence\": \"hebdomadaire\"\n    }\n  },\n\n  {\n    \"name\": \"Balade en barque dans le parc\",\n    \"price\": 8.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 4,\n    \"description\": {\n        \"mois\": [\"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\"],\n        \"type\": \"activité nautique\",\n        \"age_min\": 3\n    }\n  },\n  {\n    \"name\": \"Visite du jardin botanique\",\n    \"price\": 6.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 4,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"plantes\": \"tropicales, désertiques\",\n        \"accompagnateur\": true\n    }\n  },\n\n  {\n    \"name\": \"Croisière en bateau\",\n    \"price\": 18.00,\n    \"duration\": \"PT1H30M\",\n    \"poiId\": 5,\n    \"description\": {\n        \"mois\": [\"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\"],\n        \"circuit\": \"vieux-port et côte\",\n        \"langues\": [\"fr\", \"it\", \"en\"]\n    }\n  },\n  {\n    \"name\": \"Initiation à la pêche\",\n    \"price\": 10.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 5,\n    \"description\": {\n      \"équipement fourni\": true\n    }\n  },\n\n  {\n    \"name\": \"Randonnée guidée dans les calanques\",\n    \"price\": 25.00,\n    \"duration\": \"PT3H\",\n    \"poiId\": 6,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"niveau\": \"modéré\",\n        \"groupe\": \"max 10 personnes\"\n    }\n  },\n  {\n    \"name\": \"Baignade encadrée\",\n    \"price\": 12.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 6,\n    \"description\": {\n        \"mois\": [\"juin\", \"juillet\", \"aout\", \"septembre\"],\n        \"zone\": \"crique sécurisée\",\n        \"gilets\": \"fournis\"\n    }\n  },\n\n  {\n    \"name\": \"Accès au Fort\",\n    \"price\": 5.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 7,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"panorama\": true,\n        \"téléphérique\": \"inclus\"\n    }\n  },\n  {\n    \"name\": \"Descente VTT depuis la Bastille\",\n    \"price\": 20.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 7,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"équipement\": \"casque fourni\",\n        \"encadrement\": true\n    }\n  },\n\n  {\n    \"name\": \"Parcours guidé musée\",\n    \"price\": 7.00,\n    \"duration\": \"PT1H30M\",\n    \"poiId\": 8,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"focus\": \"art moderne\",\n        \"accompagnateur\": \"expert\"\n    }\n  },\n  {\n    \"name\": \"Atelier peinture\",\n    \"price\": 10.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 8,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"type\": \"atelier\",\n        \"public\": \"adulte et enfant\"\n    }\n  },\n\n  {\n    \"name\": \"Balade à vélo sur la Promenade\",\n    \"price\": 10.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 9,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n        \"location vélo\": true,\n        \"itinéraire\": \"bord de mer\"\n    }\n  },\n  {\n    \"name\": \"Séance de yoga face à la mer\",\n    \"price\": 15.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 9,\n    \"description\": {\n        \"mois\": [\"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\"],\n        \"niveau\": \"tous\",\n        \"matériel\": \"fourni\"\n    }\n  },\n\n  {\n    \"name\": \"Montée à pied\",\n    \"price\": 0.00,\n    \"duration\": \"PT30M\",\n    \"poiId\": 10,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"chemin\": \"escalier naturel\",\n      \"points de vue\": 3\n    }\n  },\n  {\n    \"name\": \"Visite guidée des ruines\",\n    \"price\": 8.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 10,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"histoire\": \"XVIe siècle\",\n      \"photos autorisées\": true\n    }\n  },\n\n  {\n    \"name\": \"Visite de l'hôtel de ville\",\n    \"price\": 4.00,\n    \"duration\": \"PT30M\",\n    \"poiId\": 11,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"accès\": \"libre ou avec guide\",\n      \"style\": \"néo-classique\"\n    }\n  },\n  {\n    \"name\": \"Spectacle dans le théâtre\",\n    \"price\": 12.00,\n    \"duration\": \"PT2H\",\n    \"poiId\": 11,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"type\": \"pièce ou opéra\",\n      \"réservation\": true\n    }\n  },\n\n  {\n    \"name\": \"Planétarium interactif\",\n    \"price\": 14.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 12,\n    \"description\": {\n        \"mois\": [\"janvier\", \"fevrier\", \"mars\", \"avril\", \"mai\", \"juin\", \"juillet\", \"aout\", \"septembre\", \"octobre\", \"novembre\", \"decembre\"],\n      \"type\": \"simulation\",\n      \"cible\": \"enfant/famille\"\n    }\n  },\n  {\n    \"name\": \"Animation astronaute\",\n    \"price\": 16.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 12,\n    \"description\": {\n      \"costume\": \"inclus\",\n      \"photos\": \"souvenirs\"\n    }\n  },\n  {\n    \"name\": \"Montée dans la cathédrale\",\n    \"price\": 6.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 13,\n    \"description\": {\n      \"étages\": 5,\n      \"panorama\": true\n    }\n  },\n  {\n    \"name\": \"Concert classique dans la nef\",\n    \"price\": 20.00,\n    \"duration\": \"PT1H30M\",\n    \"poiId\": 13,\n    \"description\": {\n      \"instruments\": [\"orgue\", \"violon\"],\n      \"fréquence\": \"mensuelle\"\n    }\n  },\n\n  {\n    \"name\": \"Balade historique guidée\",\n    \"price\": 12.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 14,\n    \"description\": {\n      \"thèmes\": [\"architecture\", \"patrimoine\"],\n      \"public\": \"tous\"\n    }\n  },\n  {\n    \"name\": \"Découverte des artisans locaux\",\n    \"price\": 8.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 14,\n    \"description\": {\n      \"visite\": \"ateliers de bois, tissus\",\n      \"souvenirs\": true\n    }\n  },\n\n  {\n    \"name\": \"Jeux de lumières sur la place\",\n    \"price\": 0.00,\n    \"duration\": \"PT30M\",\n    \"poiId\": 15,\n    \"description\": {\n      \"événement\": \"soirées d'été\",\n      \"accès\": \"libre\"\n    }\n  },\n  {\n    \"name\": \"Visite architecturale commentée\",\n    \"price\": 6.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 15,\n    \"description\": {\n      \"architecture\": \"XVIIIe siècle\",\n      \"style\": \"classique\"\n    }\n  },\n\n  {\n    \"name\": \"Dégustation de vins\",\n    \"price\": 18.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 16,\n    \"description\": {\n      \"vins\": [\"rouge\", \"blanc\", \"rosé\"],\n      \"accompagnement\": \"fromages\"\n    }\n  },\n  {\n    \"name\": \"Exposition interactive sur la vigne\",\n    \"price\": 10.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 16,\n    \"description\": {\n      \"supports\": [\"vidéo\", \"maquettes\"],\n      \"langues\": [\"fr\", \"en\", \"es\"]\n    }\n  },\n\n  {\n    \"name\": \"Ascension du beffroi\",\n    \"price\": 5.00,\n    \"duration\": \"PT30M\",\n    \"poiId\": 17,\n    \"description\": {\n      \"escaliers\": 400,\n      \"vue\": \"panorama sur Lille\"\n    }\n  },\n  {\n    \"name\": \"Présentation historique\",\n    \"price\": 4.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 17,\n    \"description\": {\n      \"période\": \"XIXe siècle\",\n      \"récompenses\": \"UNESCO\"\n    }\n  },\n\n  {\n    \"name\": \"Visite guidée du musée\",\n    \"price\": 7.00,\n    \"duration\": \"PT1H15M\",\n    \"poiId\": 18,\n    \"description\": {\n      \"collections\": [\"Rembrandt\", \"Rubens\", \"Courbet\"]\n    }\n  },\n  {\n    \"name\": \"Atelier peinture pour enfants\",\n    \"price\": 10.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 18,\n    \"description\": {\n      \"public\": \"6-12 ans\",\n      \"matériel fourni\": true\n    }\n  },\n\n  {\n    \"name\": \"Visite guidée du château\",\n    \"price\": 10.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 19,\n    \"description\": {\n      \"intérieur\": true,\n      \"expo temporaire\": true\n    }\n  },\n  {\n    \"name\": \"Spectacle nocturne\",\n    \"price\": 14.00,\n    \"duration\": \"PT1H30M\",\n    \"poiId\": 19,\n    \"description\": {\n      \"type\": \"sons et lumières\",\n      \"réservation\": true\n    }\n  },\n\n  {\n    \"name\": \"Tour de l’île en éléphant mécanique\",\n    \"price\": 9.00,\n    \"duration\": \"PT30M\",\n    \"poiId\": 20,\n    \"description\": {\n      \"machine\": \"éléphant géant\",\n      \"photo autorisée\": true\n    }\n  },\n  {\n    \"name\": \"Atelier construction mécanique\",\n    \"price\": 12.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 20,\n    \"description\": {\n      \"public\": \"famille\",\n      \"activités\": [\"engrenages\", \"leviers\"]\n    }\n  },\n\n  {\n    \"name\": \"Spectacle de rue\",\n    \"price\": 0.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 21,\n    \"description\": {\n      \"artistes\": [\"jongleurs\", \"musiciens\"],\n      \"gratuit\": true\n    }\n  },\n  {\n    \"name\": \"Marché local du dimanche\",\n    \"price\": 0.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 21,\n    \"description\": {\n      \"produits\": [\"fruits\", \"fromages\", \"artisanat\"]\n    }\n  },\n\n  {\n    \"name\": \"Balade botanique commentée\",\n    \"price\": 6.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 22,\n    \"description\": {\n      \"flore\": [\"médicinale\", \"locale\"],\n      \"guide\": true\n    }\n  },\n  {\n    \"name\": \"Atelier de jardinage pour enfants\",\n    \"price\": 5.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 22,\n    \"description\": {\n      \"semis\": true,\n      \"groupe\": \"8 max\"\n    }\n  },\n\n  {\n    \"name\": \"Location de pédalo\",\n    \"price\": 10.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 23,\n    \"description\": {\n      \"places\": 4,\n      \"gilets\": \"obligatoires\"\n    }\n  },\n  {\n    \"name\": \"Plongée libre avec moniteur\",\n    \"price\": 20.00,\n    \"duration\": \"PT1H30M\",\n    \"poiId\": 23,\n    \"description\": {\n      \"équipement\": \"fourni\",\n      \"encadrement\": true\n    }\n  },\n\n  {\n    \"name\": \"Visite gourmande de la vieille ville\",\n    \"price\": 14.00,\n    \"duration\": \"PT2H\",\n    \"poiId\": 24,\n    \"description\": {\n      \"dégustations\": [\"fromages\", \"glaces\", \"chocolats\"]\n    }\n  },\n  {\n    \"name\": \"Jeu de piste patrimonial\",\n    \"price\": 8.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 24,\n    \"description\": {\n      \"cible\": \"famille\",\n      \"récompense\": \"souvenir\"\n    }\n  },\n\n  {\n    \"name\": \"Visite guidée du musée\",\n    \"price\": 9.00,\n    \"duration\": \"PT1H30M\",\n    \"poiId\": 25,\n    \"description\": {\n      \"salles\": 20,\n      \"audioguide\": true\n    }\n  },\n  {\n    \"name\": \"Conférence sur les Ducs de Bourgogne\",\n    \"price\": 7.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 25,\n    \"description\": {\n      \"histoire\": \"Moyen Âge\",\n      \"intervenant\": \"historien local\"\n    }\n  },\n\n  {\n    \"name\": \"Ascension de la tour\",\n    \"price\": 5.00,\n    \"duration\": \"PT30M\",\n    \"poiId\": 26,\n    \"description\": {\n      \"marches\": 316,\n      \"vue\": \"panoramique\"\n    }\n  },\n  {\n    \"name\": \"Observation nocturne\",\n    \"price\": 8.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 26,\n    \"description\": {\n      \"éclairage\": \"à la bougie\",\n      \"histoire\": \"récits médiévaux\"\n    }\n  },\n\n  {\n    \"name\": \"Tour guidé des remparts\",\n    \"price\": 7.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 27,\n    \"description\": {\n      \"vue\": \"sur la mer\",\n      \"guide\": true\n    }\n  },\n  {\n    \"name\": \"Atelier photo maritime\",\n    \"price\": 10.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 27,\n    \"description\": {\n      \"public\": \"tous niveaux\",\n      \"matériel\": \"appareil fourni\"\n    }\n  },\n\n  {\n    \"name\": \"Visite historique du fort\",\n    \"price\": 6.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 28,\n    \"description\": {\n      \"architecte\": \"Vauban\",\n      \"date\": \"XVIIe siècle\"\n    }\n  },\n  {\n    \"name\": \"Exposition temporaire\",\n    \"price\": 4.00,\n    \"duration\": \"PT30M\",\n    \"poiId\": 28,\n    \"description\": {\n      \"thème\": \"corsaires\",\n      \"inclus\": \"audioguide\"\n    }\n  },\n\n  {\n    \"name\": \"Montée à l’Aiguille du Midi\",\n    \"price\": 35.00,\n    \"duration\": \"PT2H\",\n    \"poiId\": 29,\n    \"description\": {\n      \"téléphérique\": true,\n      \"altitude\": \"3842m\"\n    }\n  },\n  {\n    \"name\": \"Terrasse en verre : Pas dans le vide\",\n    \"price\": 5.00,\n    \"duration\": \"PT15M\",\n    \"poiId\": 29,\n    \"description\": {\n      \"sensation\": \"forte\",\n      \"photos\": \"souvenirs\"\n    }\n  },\n\n  {\n    \"name\": \"Train du Montenvers\",\n    \"price\": 28.00,\n    \"duration\": \"PT1H\",\n    \"poiId\": 30,\n    \"description\": {\n      \"accès\": \"glacier\",\n      \"trajet\": \"15 km A/R\"\n    }\n  },\n  {\n    \"name\": \"Visite grotte de glace\",\n    \"price\": 12.00,\n    \"duration\": \"PT45M\",\n    \"poiId\": 30,\n    \"description\": {\n      \"sculptures\": true,\n      \"température\": \"-2°C\"\n    }\n  }\n]\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8222/api/v1/information/activitiesList",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8222",
+									"path": [
+										"api",
+										"v1",
+										"information",
+										"activitiesList"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "roads",
+			"item": [
+				{
+					"name": "create road (single)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromCityId\": 4,\n    \"toCityId\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/roads",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"roads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create roads (batch)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"fromCityId\": 1,\n        \"toCityId\": 2\n    },\n    {\n        \"fromCityId\": 2,\n        \"toCityId\": 1\n    },\n    {\n        \"fromCityId\": 2,\n        \"toCityId\": 3\n    },\n    {\n        \"fromCityId\": 3,\n        \"toCityId\": 2\n    },\n    {\n        \"fromCityId\": 3,\n        \"toCityId\": 5\n    },\n    {\n        \"fromCityId\": 4,\n        \"toCityId\": 5\n    },\n    {\n        \"fromCityId\": 2,\n        \"toCityId\": 4\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/roadsList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"roadsList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "retreive",
+			"item": [
+				{
+					"name": "find all cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/cities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1. Quels sont les villes situées à moins de x km d’une ville donnée ?",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/cities/1/nearby?distanceKm=210",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"cities",
+								"1",
+								"nearby"
+							],
+							"query": [
+								{
+									"key": "distanceKm",
+									"value": "210"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all point of interest in a city",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/pois/by-city?cityId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"pois",
+								"by-city"
+							],
+							"query": [
+								{
+									"key": "cityId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Quelles sont les activités associées à un point d’intérêt donné ?",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/pois/1/activities?withDescription=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"pois",
+								"1",
+								"activities"
+							],
+							"query": [
+								{
+									"key": "withDescription",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Quels sont les hébergements d’une ville ?",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/cities/1/lodgings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"cities",
+								"1",
+								"lodgings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Quelles activités se font entre avril et juin ?",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description.mois\": {\n    \"$in\": [\"avril\", \"mai\", \"juin\"]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/activities/filter?withDescription=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"activities",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "withDescription",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Quelles activités de type visite ou de type concert ou de niveau facile (ouvert à tous)?",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"$or\": [\n    { \"description.type\": { \"$eq\": \"visite\" } },\n    { \"description.type\": { \"$eq\": \"concert\" } },\n    { \"description.niveau\": { \"$eq\": \"tous\" } }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8222/api/v1/information/activities/filter?withDescription=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"information",
+								"activities",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "withDescription",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Etant données une ville de départ et une ville d’arrivée, quels sont les différentes villes possibles à visiter entre les 2 ?",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/roads/intermediate-cities?fromId=1&toId=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"roads",
+								"intermediate-cities"
+							],
+							"query": [
+								{
+									"key": "fromId",
+									"value": "1"
+								},
+								{
+									"key": "toId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get trip by reference",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/trip/TRIP-2025-06-19T14:09:03.046706-2025-07-01T07:00Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"trip",
+								"TRIP-2025-06-19T14:09:03.046706-2025-07-01T07:00Z"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get time between paris and lyon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/roads/duration?fromId=1&toId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"roads",
+								"duration"
+							],
+							"query": [
+								{
+									"key": "fromId",
+									"value": "1"
+								},
+								{
+									"key": "toId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get distance between paris and lyon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8222/api/v1/roads/distance?fromId=1&toId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8222",
+							"path": [
+								"api",
+								"v1",
+								"roads",
+								"distance"
+							],
+							"query": [
+								{
+									"key": "fromId",
+									"value": "1"
+								},
+								{
+									"key": "toId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
