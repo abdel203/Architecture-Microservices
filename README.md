@@ -93,7 +93,13 @@ docker compose up -d
 ### 9. Tester l'application : 
 
 Pour tester l'application, ouvrir postman et importer le fichier TestSimulation.json présent dans le répertoire.
- 
+Ceci va permettre à postman de mettre à votre disposition plusieurs dossiers pour un jeu de test.
+Voici l'ordre d'éxecution des tests que nous vous conseillons pour éviter les erreurs : 
+- Ouvrir le dossier create -> create (Batch).
+- Executer dans l'ordre les requetes : POST create cities/POST create lodging/ POST create points of interest / POST create activity.
+- Ouvrir le dossier roads.
+- Executer la requete POST create roads (batch)
+- Maintenant, vous pouvez vous amusez avec les requetes mises à votre disposition dans le repertoire qui ont pour but la découverte des villes, logements, activités, centres d'intérets etc. Ne pas éxecuter la requete GET get trip by reference avant d'avoir créer un 'trip', une simulation de création de voyage est disponible grace à l'execution de la route "create -> create (one by one) -> POST create trip", une fois cette requete executer elle renvoie la reference du voyage qui pourra etre utilsier en paramètre de la requete GET get trip by reference pour voir le sommaire du voyage programmé.
 ---
 
 ## 📬 Contact
